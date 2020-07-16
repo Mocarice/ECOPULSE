@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/bootstrap.min.css' />
+    <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <style>
+    #submit{border-radius: 12px;}
+    #auth{border-radius: 12px;}
+    #token{border-radius: 12px;}
+    #refresh{border-radius: 12px;}
+    #account{border-radius: 12px;}
+    #reAuth{border-radius: 12px;}
+    .back{display: block; margin: 0px auto;}
+    .loginInput{display: block; margin: 0 auto; width: 300px; }
+    .intro{ width:40vw;
+            height:600px;
+            position:absolute;
+            right:10%;
+            top:20%;
+            font-size: 2vw;
+    }
+  </style>
+
+
+  </head>
+  <body>
+
+<div class="container-fluid">
+  
+      <nav class="navbar navbar-expand-sm bg-white navbar-white fixed-top" style="padding: 1%; width: 100%;">
+        <a href="/"><img class="logoImg" src="../eco.jpg" height="70" style="margin-left: 5%;"></a>
+        <button type="button" class="btn btn-primary" style="padding: 15px 30px; margin-left: auto; background-color: #E2F0D9; border: #E2F0D9; color: #006532; "
+        data-toggle="modal" data-target="#signinModal">
+          <b>Sign In</b>
+        </button>
+      </div>
+    </nav>
+
+  <div class="row" style="border-style: none; background-color:  #c5e0b5;">
+    <div class="col-lg-6 col-md-6 col-6 bg-black text-black"><img src="../earth.jpg" width="100%"></div>
+    <div class="col-lg-6 col-md-6 col-6 bg-black text-black">
+    <div class="intro"><b>미국 항공 우주국 NASA 보고에 따르면 21세기 초부터 2018년까지 지구 표면의 평균온도는 1980년에 비해 약 0.93±0.07° 상승했습니다.
+  
+  
+      지구온난화로 인한 기온상승은 극한 폭염의 증가, 가뭄, 폭우, 해양 산성화 등 기상이변으로 이어졌고 인간의 생활 뿐만 아니라 지구의 자연동물에게도 큰 영향을 미치고 있습니다.
+    </b></div>
+    </div>
+  </div>
+  <div class="row" style="border-style: none; background-color:  #c5e0b5;">
+    <div class="col-lg-6 col-md-6 col-6 bg-black text-black" ><img src="../recycle.jpg" width="100%"></div>
+    <div class="col-lg-6 col-md-6 col-6 bg-black text-black">
+      <div class="intro"><b>ECO-PULSE는 작은 것부터 실천하여 지구를 지키자는 생각을 가지고 있습니다. 이름에서 느껴지는 것처럼 환경오염에 대한 우려와 인식의 개선으로 지구의 심장박동 수를 정상으로 되돌리고자 노력할 것입니다.
+  
+    지구온난화의 주요 원인인 온실가스 배출량을 줄이기 위해 쓰레기의 배출량 감소와 쓰레기 재활용 등의 활동의 일상화를 위해 노력합니다.</b></div>
+  
+    </div>
+  </div>
+  <div class="row" style="border-style: none; background-color:  #c5e0b5;">
+    <div class="col-lg-6 col-md-6 col-6 bg-black text-black" ><img src="../earth.jpg" width="100%"></div>
+    <div class="col-lg-6 col-md-6 col-6 bg-black text-black">
+      <div class="intro"><b>ECO-PULSE는 유저분들의 수익까지 생각합니다.
+  
+    종이, 플라스틱, 유리병 등 일상에서 재활용을 위해 노력한 모습이나 지구환경을 위해 노력한 사진들을 ECO-PULSE에 업로드해주시면 인증을 통하여 포인트를 지급해 드립니다.
+  
+    지급된 포인트는 자신이 설정한 기간까지 지구를 위한 활동을 마침과 동시에 유저분들의 계좌로 입금됩니다.
+  (단, 지구를 위한 노력을 하지 않으면 일정 포인트가 감소됩니다.)</b></div>
+  
+    </div>
+  </div>
+  
+  
+  <footer style="width: 100%; position: fixed; bottom: 0%; height: 80px; background-color: white;">
+    <div class="row" style="width: 100%;">
+      <div class="col-lg-12 col-md-12 col-sm-12" style="color: #006532; margin-top: 20px; margin-bottom: 20px;">
+      <p><b style="margin-left: 20px;">Copyright 2020. eco-pulse.kr. All rights reserved.</b>
+        <a href="https://www.facebook.com"><img src="../social1_icon.png" width="50" style="float: right;"></a>
+        <a href="https://www.instagram.com"><img src="../social2_icon.png" width="50" style="float: right;"></a>
+        <a href="https://twitter.com"><img src="../social3_icon.png" width="50" style="float: right;"></a>
+        <a href="https://www.eco-pulse.kr"><img src="../social4_icon.png" width="43" style="float: right;"></a>
+      </p>
+      </div>
+    </div> 
+    </footer>
+  
+  <!-- 로그인 Modal -->
+  <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signinModalLabel">로그인</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input class="loginInput" type="text" id="identity" placeholder="아이디"/><br/>
+          <input class="loginInput" type="password" id="password" placeholder="패스워드"><br/>
+          <a href="confirm">
+            Sign Up
+          </a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="submit" type="button" class="btn btn-primary" onclick="login();">sign in</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+    
+  </br></br>
+  
+
+    <script>
+      function replaceSpecialText(text) {
+        var replacetext  = /[<>()`]/gi;
+        return text.replace(replacetext, '');
+      }
+      function addReplaceEventToInput(elementId){
+        function eventFunction () {
+          var x = $(this).val();
+          if (x.length > 0) {
+            x = replaceSpecialText(x);
+            $(this).val(x);
+          }
+        }
+        $("#" + elementId).on("focusout", eventFunction).on("keyup", eventFunction);
+      }
+
+      $(document).ready(function(){
+        addReplaceEventToInput("identity");
+        addReplaceEventToInput("password");
+        addReplaceEventToInput("joinIdentity");
+        addReplaceEventToInput("joinPassword");
+        addReplaceEventToInput("joinNickname");
+        addReplaceEventToInput("joinEmailid");
+        addReplaceEventToInput("joinCellphone");
+        addReplaceEventToInput("joinBankaccount");
+        addReplaceEventToInput("joinRefid");
+      });
+
+      function login(){
+        const identity = $("#identity").val();
+        const password = $("#password").val();
+        if(!identity || !password){
+          return alert("아이디 패스워드를 입력해주세요");
+        }
+        $.ajax({
+          url: "/users/login",
+          method: "post",
+          dataType: "text",//응답이 돌아올 데이터 타입. 이게 안맞으면 에러로 빠짐
+          data: {
+            identity: identity,
+            password: password
+          },
+          success: function(response){
+            alert("로그인 성공");
+            window.location.reload();//새로고침
+          },
+          error: function(){
+            alert("아이디 혹은 패스워드가 틀렸습니다.")
+
+          }
+        });
+      }
+
+
+      function join(){
+        const identity = $("#joinIdentity").val();//제이쿼리안에 들어가는게 셀렉터
+        const password = $("#joinPassword").val();
+        const name = $("#joinName").val();
+        const nickname = $("#joinNickname").val();
+        const email = $("#joinEmailid").val() +"@"+ $("select[name=joinEmailhost]").val();
+        const agree = $('input[name="radioAgree"]:checked').val();
+        const cellphone = $("#joinCellphone").val();
+        const bankname = $("select[name=joinBankname]").val();
+        const bankaccount = $("#joinBankaccount").val();
+        const refid = $("#joinRefid").val();
+        console.log(bankname);
+          if (!identity || !password || !nickname){
+          return alert("아이디, 패스워드 혹은 닉네임이 누락되었습니다.")
+        } else if (agree !== "Agree"){
+          return alert("약관에 동의하지 않으면 회원으로 가입하실 수 없습니다.")
+        };
+        $.ajax({
+          url: '/users/create',
+          method: 'post',
+          dataType: 'text',
+          data: {
+            identity: identity,
+            password: password,
+            name: name,
+            nickname: nickname,
+            email: email,
+            cellphone: cellphone,
+            bankname: bankname,
+            bankaccount: bankaccount,
+            refid: refid,
+          },
+          success: function(){
+            alert("회원가입 성공")
+            $("#joinIdentity").val('');
+            $("#joinPassword").val('');
+            $("#joinName").val('');
+            $("#joinNickname").val('');
+            $('#joinEmail').val('');
+            $('#joinCellphone').val('');
+            $('#joinBankname').val('');
+            $('#joinBankaccount').val('');
+            $('#joinRefid').val('');
+            window.location.reload();//새로고침
+          },
+          error: function(error){
+            alert(error.responseText);
+          }
+        });
+
+      }
+
+      //인증창 새로 팝업 띄우는 함수
+      function winOpen(url,title,width,height,top,left){
+        window.open(url,title,"width="+width+",height="+height+",top="+top+",left="+left);
+      }
+    </script>
+  </body>
+</html>
