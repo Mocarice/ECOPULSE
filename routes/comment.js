@@ -98,6 +98,4 @@ router.delete('/comment/:commentId', function(req, res){
     res.send("Success");
 });
 
-console.log(readComments(0));
-
 module.exports = router;//이걸로 인해 app.js에서 req로 불러올수있음

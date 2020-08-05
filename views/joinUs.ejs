@@ -18,12 +18,6 @@
     ul.myMenu > li ul.submenu > li { display:inline-block; width:100px; padding:5px 10px; background:#eee; border:1px solid #eee; text-align:center; }
     ul.myMenu > li ul.submenu > li:hover { background:#fff; }
     
-    .box-container {
-     display: flex; background-color: lightyellow;
-    }
-    .box {
-      flex-direction: column;
-    }
 </style>
 <style type="text/css">
   a:link { color: black; text-decoration: none;}
@@ -73,11 +67,15 @@
       <div class="box">3) 성공 : 현재 마일리지에 2% 적립(월단위로 변경)</div>
       <div class="box">4) 기간초과 : 현재 마일리지에 2%차감 - 최대 50%</div>
    </div>
+   <div id="box" style="height: 60px;"></div>
 
   <!-- Button trigger modal -->
+  <center>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#JoinModal">
     참여하기
   </button>
+
+  </center>
   
   <!-- Modal -->
   <div class="modal fade" id="JoinModal" tabindex="-1" role="dialog" aria-labelledby="JoinModalLabel" aria-hidden="true">
@@ -90,12 +88,16 @@
           </button>
         </div>
         <div class="modal-body">
-          계좌번호<br>
-          예금주
+          계좌번호 : <%-userInfo.bankaccount%> <%-userInfo.bankname%><br>
+          예금주 : <%-userInfo.bankHolderName%><br><br>
+          에서<br><br>
+          계좌번호 : 110302319823 신한은행<br>
+          예금주 : 최승환<br><br>
+          로 해당 금액 <input type="text" id="point"/>원 을 충전하는게 맞습니까?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick = "points();">충전</button>
         </div>
       </div>
     </div>
@@ -136,6 +138,26 @@
           },
           error: function(){}
         })
+      }
+
+      function points(){
+        const point = $("#point").val();
+        $.ajax({
+          url: '/users/pointCharge',
+          method: 'post',
+          dataType: 'text',
+          data: {
+            point: point,
+          },
+          success: function(){
+            $('#point').val('');
+            window.location.reload();
+          },
+          error: function(error){
+            alert(error.responseText);
+          }
+        });
+
       }
     </script>
   </body>

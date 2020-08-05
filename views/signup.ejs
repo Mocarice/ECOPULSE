@@ -217,7 +217,6 @@
         const bankname = $("select[name=joinBankname]").val();
         const bankaccount = $("#joinBankaccount").val();
         const refid = $("#joinRefid").val();
-        console.log(bankname);
           if (!identity || !password || !nickname){
           return alert("아이디, 패스워드 혹은 닉네임이 누락되었습니다.")
         } else if (agree !== "Agree"){
@@ -249,7 +248,7 @@
             $('#joinBankname').val('');
             $('#joinBankaccount').val('');
             $('#joinRefid').val('');
-            window.location.reload();//새로고침
+            location.href = "http://localhost:3000";
           },
           error: function(error){
             alert(error.responseText);

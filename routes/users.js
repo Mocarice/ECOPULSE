@@ -88,6 +88,37 @@ function encryptStr(str, salt){
 //  return crypto.createHash('sha256').update(str).digest('hex');
 }
 
+// function pointCharge(points, identity){
+//     const users = readUsers();
+
+//     const user = users.filter((user) => {
+//         return user.identity === identity;
+//     })[0];
+//     console.log(identity);
+//     console.log(points);
+
+//     user.point += points;
+//     fs.writeFileSync('./db/users.json', JSON.stringify(users, null ,2));
+  
+// }
+
+router.post('/pointCharge', function(req,res){
+  let points = parseInt(req.body.point);
+  const identity = req.session.userInfo.identity;
+  const users = readUsers();
+
+    const user = users.filter((user) => {
+        return user.identity === identity;
+    })[0];
+
+    user.point += points;
+    req.session.userInfo.point = user.point;
+    user.level = 2;
+    req.session.userInfo.level = user.level;
+    fs.writeFileSync('./db/users.json', JSON.stringify(users, null ,2));
+  //pointCharge(points, identity);
+  res.send("Charge Success");
+});
 
 router.post('/login', function(req, res){
   const identity = req.body.identity;
@@ -133,8 +164,8 @@ router.post('/create', function(req, res){
   const bankname = req.body.bankname;
   const cellphone = req.body.cellphone;
   const refid = req.body.refid || ''; //?
-  const point = 0;
-  const level = 1;
+  let point = 0;
+  let level = 1;
   
   if (!identity || !password || !nickname){
     return res.status(400).send("Some parameter lost");
@@ -158,7 +189,6 @@ router.post('/create', function(req, res){
 
 //Access token 발급 request
 router.post("/proxy/get/token", async function (req, res, next) { 
-  console.log(req.session.code);
   
   const result = await superagent
     .post('https://testapi.openbanking.or.kr/oauth/2.0/token')
@@ -183,8 +213,6 @@ router.post("/proxy/get/token", async function (req, res, next) {
     .query({include_cancel_yn:'N'})
     .query({sort_order: "D"});
     
-  console.log(req.session.access_token, req.session.user_seq_no, result.body);
-  console.log(result1.body);
   req.session.fintechNumber = result1.body.res_list[0].fintech_use_num;
   req.session.realBankName = result1.body.res_list[0].bank_name;
   req.session.bankHolderName = result1.body.res_list[0].account_holder_name;
@@ -223,23 +251,25 @@ router.get('/auth', function(req,res) {
   api_url = 'https://testapi.openbanking.or.kr/oauth/2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&scope=' + scope + '&client_info=' + client_info + '&state=' + state + '&auth_type=' + auth_type;
   api_url2 = 'http://localhost:3000/auth/google';
   res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
-  res.end("<a href='"+ api_url + "'><img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a> <a href='"+ api_url2 + "'><img height='50' src='https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile27.uf.tistory.com%2Fimage%2F998689465C3D7D1217F053'/></a>");
+  res.end("<a href='"+ api_url + "'><img height='50' src='https://cdn1.iconfinder.com/data/icons/basic-ui-7/100/Artboard_95-512.png'/></a> <a href='"+ api_url2 + "'><img height='50' src='https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile27.uf.tistory.com%2Fimage%2F998689465C3D7D1217F053'/></a>");
 });
 
 //등록된 계좌가 있을시 access token 기반으로 인증절차 예외 -------- 미업데이트
-router.get('/reAuth', async function(req,res){
+router.post('/withdraw', async function(req,res){
   const result = await superagent
-    .get('https://testapi.openbanking.or.kr/oauth/2.0/authorize_account')
-    .set({'Kftc-Bfop-UserSeqNo': req.session.user_seq_no})
-    .set({'Kftc-Bfop-UserCI': user_ci})
-    .set({'Kftc-Bfop-AccessToken': req.session.access_token})
-    .query({response_type: 'code'})
-    .query({client_id:client_id})
-    .query({redirect_uri: redirectURI})
-    .query({scope: scope})
-    .query({client_info: client_info})
-    .query({state: state})
-    .query({auth_type: auth_type});
+    .post('https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num')
+    .set({'Authorization': 'Bearer '+ req.session.access_token})
+    .query({bank_tran_id: 'code'})
+    .query({cntr_account_type:client_id})
+    .query({cntr_account_num: redirectURI})
+    .query({dps_print_content: scope})
+    .query({fintech_use_num: req.session.fintechNumber})
+    .query({tran_amt: state})
+    .query({tran_dtime: auth_type})
+    .query({req_client_name: state})
+    .query({req_client_num: state})
+    .query({transfer_purpose: state});
+
   
   res.json(result.body);
 });
